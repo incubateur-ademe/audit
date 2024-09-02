@@ -11,7 +11,7 @@ import {
 import React from "react";
 import { getAudit } from "@/infrastructure/repositories/auditRepository";
 
-export default async function RootLayout({ children, params: { auditId } }: { children: JSX.Element; }) {
+export default async function RootLayout({ children, params: { auditId } }: { children: JSX.Element; params: any }) {
 
   	const audit = await getAudit(auditId);
 

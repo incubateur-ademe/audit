@@ -17,13 +17,13 @@ export async function getGristQuestions() {
     })).data;
 }
 
-export async function saveGristReponses(records) {
+export async function saveGristReponses(records: any) {
     await apiClient.put(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.REPONSES.ID}/records`, { 
         records 
     });
 }
 
-export async function getGristAudit(auditId) {
+export async function getGristAudit(auditId: number) {
     return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.AUDITS.ID}/records`, {
         params: {
             filter: `{"${GRIST.TABLES.AUDITS.FIELDS.ID}":["${auditId}"]}`
@@ -31,7 +31,7 @@ export async function getGristAudit(auditId) {
     })).data.records[0] ?? null
 }
 
-export async function getGristProduit(produitId) {
+export async function getGristProduit(produitId: number) {
     return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.PRODUITS.ID}/records`, {
         params: {
             filter: `{"${GRIST.TABLES.AUDITS.FIELDS.ID}":["${produitId}"]}`

@@ -1,10 +1,8 @@
-import { REPONSE_NE_SAIS_PAS, REPONSE_NON, REPONSE_NON_APPLICABLE, REPONSE_OUI } from "@/app/constants"
-
 export enum REPONSE_OPTIONS {
-    OUI=REPONSE_OUI,
-    NON=REPONSE_NON,
-    NE_SAIS_PAS=REPONSE_NE_SAIS_PAS,
-    NON_APPLICABLE=REPONSE_NON_APPLICABLE,
+    OUI="Oui",
+    NON="Non",
+    NE_SAIS_PAS="Ne sais pas",
+    NON_APPLICABLE="N/A",
 }
 
 export interface Categorie {

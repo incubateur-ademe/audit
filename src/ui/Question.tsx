@@ -11,7 +11,7 @@ import React from "react";
 export default function Question({ auditId, question }: {auditId: number, question: QuestionType}) {
 
     const [reponse, setReponse] = React.useState<REPONSE_OPTIONS | null>(null);
-    const [comment, setComment] = React.useState(null);
+    const [comment, setComment] = React.useState("");
     const [percentage, setPercentage] = React.useState(0);
 
     React.useEffect(() => {
@@ -20,7 +20,7 @@ export default function Question({ auditId, question }: {auditId: number, questi
                 auditId, 
                 questionId: question.id, 
                 reponse, 
-                commentaire: comment, 
+                commentaire: comment ?? null, 
                 pourcentage: reponse === REPONSE_NON ? percentage : null
             });
         }
@@ -69,6 +69,7 @@ export default function Question({ auditId, question }: {auditId: number, questi
                 />
                 { reponse === REPONSE_NON && (
                     <Range
+                        label=""
                         state={percentage ? 'success' : 'default'}
                         hintText='A quel pourcentage êtes vous du "Oui" ?'
                         max={100}
@@ -84,6 +85,7 @@ export default function Question({ auditId, question }: {auditId: number, questi
             </div>
             
             <Input
+                label=""
                 style={{flexGrow: 0.4}}
                 nativeTextAreaProps={{
                     style: {flexGrow: 1},

@@ -3,7 +3,7 @@ import { getQuestions } from "@/infrastructure/repositories/questionRepository";
 import Question from "@/ui/Question";
 import { CallOut } from "@codegouvfr/react-dsfr/CallOut";
 
-export default async function Page({ params: { auditId }}) {
+export default async function Page({ params: { auditId }}: any) {
     const parsedAuditId = parseInt(auditId);
 
     const audit = await getAudit(parsedAuditId);
@@ -14,12 +14,12 @@ export default async function Page({ params: { auditId }}) {
             { audit ? (
                 <>
                 { categories && categories.map((category) => (
-                    category.title && (
-                    <div key={`category.${category.title}`} style={{marginBottom: 50}}>
-                    <CallOut
-                        iconId="ri-information-line"
-                        title={ category.title }
-                        ></CallOut>
+                    category.titre && (
+                    <div key={`category.${category.titre}`} style={{marginBottom: 50}}>
+                        <CallOut
+                            iconId="ri-information-line"
+                            title={ category.titre }
+                        ><></></CallOut>
                     { category.questions.map((question) => (
                         <Question auditId={parsedAuditId} question={question} key={`question.${question.id}`}/>
                     ))}

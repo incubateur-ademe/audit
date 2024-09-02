@@ -7,7 +7,7 @@ export async function getQuestions(): Promise<Categorie[]> {
 
     const gristQuestions = await getGristQuestions();
 
-    return Object.values(gristQuestions.records.reduce((acc, gristQuestion) => {
+    return Object.values(gristQuestions.records.reduce((acc: Record<string, Categorie>, gristQuestion: any) => {
         return {
             ...acc,
             [gristQuestion.fields.Categorie]: {
