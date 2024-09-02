@@ -4,9 +4,9 @@ This a project aiming to build survey forms from a set of questions stored on a 
 
 ```
 cp .env.template .env.local # Configure here your Grist server URL & API Key
-npm install
-npm run build
-npm run dev
+yarn
+yarn build
+yarn dev
 ```
 
 ## License

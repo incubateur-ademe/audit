@@ -1,7 +1,10 @@
 {
   "name": "survey-builder",
   "version": "0.1.0",
-  "private": true,
+  "license": "MIT",
+  "engines" : { 
+    "node" : "~20"
+  },
   "scripts": {
     "predev": "react-dsfr update-icons",
     "prebuild": "react-dsfr update-icons",
