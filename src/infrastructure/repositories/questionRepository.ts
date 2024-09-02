@@ -12,7 +12,7 @@ export async function getQuestions(): Promise<Categorie[]> {
             ...acc,
             [gristQuestion.fields.Categorie]: {
                 ...acc[gristQuestion.fields.Categorie],
-                title: gristQuestion.fields.Categorie,
+                titre: gristQuestion.fields.Categorie,
                 questions: [
                     ... (acc[gristQuestion.fields.Categorie] ? acc[gristQuestion.fields.Categorie].questions : []),
                     {
