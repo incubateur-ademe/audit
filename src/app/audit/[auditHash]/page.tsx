@@ -2,6 +2,7 @@ import { getAudit } from "@/infrastructure/repositories/auditRepository";
 import { getQuestions } from "@/infrastructure/repositories/questionRepository";
 import Question from "@/ui/Question";
 import { CallOut } from "@codegouvfr/react-dsfr/CallOut";
+import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
 
 export default async function Page({ params: { auditHash }}: any) {
     const audit = await getAudit(auditHash);
@@ -9,7 +10,6 @@ export default async function Page({ params: { auditHash }}: any) {
     if (!audit) {
         return (<p>Audit not found</p>);
     }
-
 
     const categories =  await getQuestions(audit.id);
 
@@ -23,19 +23,20 @@ export default async function Page({ params: { auditHash }}: any) {
                 Bon audit !
             </p>
         
-            { categories && categories.map((category) => (
-                category.titre && (
-                <div key={`category.${category.titre}`} style={{marginBottom: 50}}>
-                    <CallOut
-                        title={ category.titre }
-                    ><></></CallOut>
-                { category.questions.map((question) => (
-                    <Question audit={audit} question={question} key={`question.${question.id}`}/>
-                ))}
-                </div>
-                )
-            ))}
-            <br/>
+            <Tabs
+                tabs={ categories && categories.map((category) => ({
+                    label: category.titre,
+                    content : (
+                    category.titre && (
+                    <div key={`category.${category.titre}`}>
+                    { category.questions.map((question) => (
+                        <Question audit={audit} question={question} key={`question.${question.id}`}/>
+                    ))}
+                    </div>
+                    )
+                )})
+                )}
+            />
         </>
     );
 }
