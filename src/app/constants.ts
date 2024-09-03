@@ -10,7 +10,8 @@ export const GRIST = {
         AUDITS: {
             ID: "Audits",
             FIELDS: {
-                ID: "ID2"
+                ID: "ID2",
+                HASH: "Hash"
             }
         },
         REPONSES: {

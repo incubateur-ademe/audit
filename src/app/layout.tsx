@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: JSX.Element; }) {
 	return (
 		<html {...getHtmlAttributes({ defaultColorScheme })}>
 			<head>
-				<title>Next 14 App Router Demo Setup</title>
+				<title>ANCT - Incubateur - Audits techniques</title>
 				<StartDsfr />
 				<DsfrHead
 					Link={Link}

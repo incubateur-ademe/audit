@@ -1,11 +1,18 @@
 'use server'
 
-import { Categorie } from "@/domain/types";
+import { Categorie, Reponse } from "@/domain/types";
 import { getGristQuestions } from "../gristClient";
+import { getReponses } from "./reponsesRepository";
 
-export async function getQuestions(): Promise<Categorie[]> {
+export async function getQuestions(auditId: number): Promise<Categorie[]> {
 
     const gristQuestions = await getGristQuestions();
+    const reponses: Record<string, Reponse> = (await getReponses(auditId)).reduce((acc: Record<string, Reponse>, reponse) => {
+        return {
+            ...acc,
+            [reponse.questionId]: reponse
+        }
+    }, {});
 
     return Object.values(gristQuestions.records.reduce((acc: Record<string, Categorie>, gristQuestion: any) => {
         return {
@@ -16,8 +23,11 @@ export async function getQuestions(): Promise<Categorie[]> {
                 questions: [
                     ... (acc[gristQuestion.fields.Categorie] ? acc[gristQuestion.fields.Categorie].questions : []),
                     {
-                        id: gristQuestion.fields.ID2,
-                        question: gristQuestion.fields.Question
+                        id: gristQuestion.id,
+                        question: gristQuestion.fields.Question,
+                        importance: gristQuestion.fields.Importance,
+                        tooltip: gristQuestion.fields.Tooltip,
+                        reponse: reponses[gristQuestion.id],
                     }
                 ]
             }

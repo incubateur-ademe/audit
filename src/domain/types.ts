@@ -5,6 +5,13 @@ export enum REPONSE_OPTIONS {
     NON_APPLICABLE="N/A",
 }
 
+export enum IMPORTANCE_OPTION {
+    P0="P0",
+    P1="P1",
+    P2="P2",
+    P3="P3",
+}
+
 export interface Categorie {
     titre: string
     questions: Question[]
@@ -13,6 +20,9 @@ export interface Categorie {
 export interface Question {
     id: number
     question: string
+    tooltip: string
+    importance: IMPORTANCE_OPTION
+    reponse: Reponse|null
 }
 
 export interface Produit {
@@ -22,8 +32,10 @@ export interface Produit {
 
 export interface Audit {
     id: number
-    date: Date
+    dateComiteInvestissement: Date
     produit: Produit
+    cloture: boolean
+    clotureLe: Date
 }
 
 export interface Reponse {

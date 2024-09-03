@@ -12,9 +12,18 @@ const apiClient = axios.create({
 export async function getGristQuestions() {
     return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.QUESTIONS.ID}/records`, {
         params: {
-            sort: 'manualSort'
+            sort: 'manualSort',
+            filter: '{"Statut": ["Validée"]}'
         }
     })).data;
+}
+
+export async function getGristReponses(auditId: number) {
+    return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.REPONSES.ID}/records`, {
+        params: {
+            filter: `{"Audit": [${auditId}]}`
+        }
+    })).data?.records ?? [];
 }
 
 export async function saveGristReponses(records: any) {
@@ -23,10 +32,10 @@ export async function saveGristReponses(records: any) {
     });
 }
 
-export async function getGristAudit(auditId: number) {
+export async function getGristAudit(auditHash: string) {
     return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.AUDITS.ID}/records`, {
         params: {
-            filter: `{"${GRIST.TABLES.AUDITS.FIELDS.ID}":["${auditId}"]}`
+            filter: `{"${GRIST.TABLES.AUDITS.FIELDS.HASH}":["${auditHash}"]}`
         }
     })).data.records[0] ?? null
 }

@@ -11,17 +11,17 @@ import {
 import React from "react";
 import { getAudit } from "@/infrastructure/repositories/auditRepository";
 
-export default async function RootLayout({ children, params: { auditId } }: { children: JSX.Element; params: any }) {
+export default async function RootLayout({ children, params: { auditHash } }: { children: JSX.Element; params: any }) {
 
-  	const audit = await getAudit(auditId);
+  	const audit = await getAudit(auditHash);
 
 	return (
 		<MuiDsfrThemeProvider>
 			<Header
 				brandTop={<>ANCT</>}
-				serviceTitle={audit?.id ? `Audits technique du produit ${audit.produit.nom} le ${audit.date.toLocaleDateString()}` : "Audits techniques de l'incubateur de l'ANCT"}
+				serviceTitle={audit?.id ? `Audits technique de ${audit.produit.nom} pour le comité d'investissement du ${audit.dateComiteInvestissement.toLocaleDateString()}` : "Audits techniques de l'incubateur de l'ANCT"}
 				homeLinkProps={{
-					href: "/",
+					href: "#",
 					title: "Audits techniques - ANCT"
 				}}
 				quickAccessItems={[
