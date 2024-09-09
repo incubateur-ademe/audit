@@ -19,7 +19,7 @@ export default async function RootLayout({ children, params: { auditHash } }: { 
 		<MuiDsfrThemeProvider>
 			<Header
 				brandTop={<>ANCT</>}
-				serviceTitle={audit?.id ? `Audits technique de ${audit.produit.nom} pour le comité d'investissement du ${audit.dateComiteInvestissement.toLocaleDateString()}` : "Audits techniques de l'incubateur de l'ANCT"}
+				serviceTitle={audit?.id ? `Audits technique de ${audit.produit.nom} pour le comité d'investissement du ${audit.dateComiteInvestissement.toLocaleDateString('fr')}` : "Audits techniques de l'incubateur de l'ANCT"}
 				homeLinkProps={{
 					href: "#",
 					title: "Audits techniques - ANCT"

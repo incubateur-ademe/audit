@@ -29,7 +29,6 @@ let currentTimerId: NodeJS.Timeout;
 
 async function naiveSaveWithPacking(reponse?: Reponse) {
     if (!isPacking) {
-        console.log('>> Start packing')
         packedReponses= {};
         isPacking = true;
         currentTimerId = setTimeout(naiveSaveWithPacking, 1000);
@@ -37,7 +36,6 @@ async function naiveSaveWithPacking(reponse?: Reponse) {
         const countReponses = Object.keys(packedReponses).length;
         if (!reponse|| countReponses > 20) {
             if (countReponses > 0) {
-                console.log(`>> Save ${countReponses} réponses`);
                 await saveReponses(Object.values(packedReponses));
             }
             isPacking = false;
@@ -46,7 +44,6 @@ async function naiveSaveWithPacking(reponse?: Reponse) {
     }
 
     if (reponse) {
-        console.log('>>>> Add réponse '+ reponse.questionId);
         packedReponses = {
             ...packedReponses,
             [await reponseId(reponse)]: reponse
