@@ -7,6 +7,7 @@ import Input from "@codegouvfr/react-dsfr/Input";
 import RadioButtons from "@codegouvfr/react-dsfr/RadioButtons";
 import { Range } from "@codegouvfr/react-dsfr/Range";
 import React from "react";
+import { Badge } from "@codegouvfr/react-dsfr/Badge";
 
 export default function Question({ audit, question }: {audit: Audit, question: QuestionType }) {
 
@@ -16,7 +17,6 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
 
     React.useEffect(() => {
         const effect = async () => {
-            question.id === 15 && console.log('Apply save effect effect')
             await saveReponse({
                 auditId: audit.id, 
                 questionId: question.id, 
@@ -29,11 +29,11 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
     }, [reponse, comment, percentage]);
 
     return (
-        <div style={{display: 'flex', flexDirection: 'row', marginTop: 20, alignItems: 'stretch'}}>
-            <div style={{marginRight: 20,  flexBasis: 600, flexGrow: 0.6}}>
+        <div style={{display: 'flex', flexDirection: 'row', marginTop: 20, alignItems: 'stretch', paddingBottom: 20}}>
+            { reponse && (<Badge severity="success" style={{marginRight: 10}}/>)}
+            <div style={{marginRight: 20, flexBasis: 400, flexGrow: 0.6}}>
                 <RadioButtons
                     disabled={audit.cloture}
-                    state={reponse ? 'success' : 'default'}
                     legend={question.question}
                     hintText={question.tooltip}
                     style={{whiteSpace: 'pre-line'}}
@@ -73,7 +73,6 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
                     <Range
                         disabled={audit.cloture}
                         label=""
-                        state={percentage ? 'success' : 'default'}
                         hintText='A quel pourcentage êtes vous du "Oui" ?'
                         max={100}
                         min={0}
@@ -90,10 +89,10 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
             <Input
                 disabled={audit.cloture}
                 label=""
-                style={{flexGrow: 0.4}}
+                style={{display: 'flex', flexGrow: 0.4 }}
                 nativeTextAreaProps={{
                     value: comment,
-                    style: {flexGrow: 1},
+                    style: {display: 'flex', flexGrow: 1 },
                     placeholder: "Commentaires / détails",
                     name: `reponses[${question.id}][comment]`,
                     onChange: async (event) => { await setComment(event.currentTarget.value); }
