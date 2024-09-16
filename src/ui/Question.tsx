@@ -9,6 +9,7 @@ import { Range } from "@codegouvfr/react-dsfr/Range";
 import React from "react";
 import { Badge } from "@codegouvfr/react-dsfr/Badge";
 import { Card } from "@codegouvfr/react-dsfr/Card";
+import { Button } from "@codegouvfr/react-dsfr/Button";
 
 export default function Question({ audit, question }: {audit: Audit, question: QuestionType }) {
 
@@ -56,6 +57,7 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
     }
 
     return (
+        <div style={{ padding: 10, marginBottom: 10, borderRadius: 5, ... !audit.cloture && reponse && { border: 'solid 1px #27a658'} }}>
         <div style={{display: 'flex', flexDirection: 'row', marginTop: 20, alignItems: 'stretch', paddingBottom: 20}}>
             { audit.cloture ? (
                 <Card
@@ -75,7 +77,6 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
                 />
             ) : (
                 <>
-                    { reponse && (<Badge severity="success" style={{marginRight: 10}}/>)}
                     <div style={{marginRight: 20, flexBasis: 400, flexGrow: 0.6}}>
                         <RadioButtons
                             disabled={audit.cloture}
@@ -146,6 +147,14 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
                     />
                 </>
             )}
+        </div>
+        { !audit.cloture && reponse && (
+            <div>
+                <Badge severity="success" style={{marginRight: 10 }}>Répondue</Badge>
+                <Button priority="tertiary no outline" iconId="ri-arrow-go-back-line" onClick={() => {setReponse(null); setPercentage(0); setComment('')}}/>
+            </div>
+        )}
+
         </div>
     );
 }
