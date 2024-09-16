@@ -10,6 +10,7 @@ import React from "react";
 import { Badge } from "@codegouvfr/react-dsfr/Badge";
 import { Card } from "@codegouvfr/react-dsfr/Card";
 import { Button } from "@codegouvfr/react-dsfr/Button";
+import { AlertProps } from "@codegouvfr/react-dsfr/Alert";
 
 export default function Question({ audit, question }: {audit: Audit, question: QuestionType }) {
 
@@ -31,7 +32,8 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
     }, [reponse, comment, percentage]);
 
     const badgeForReponse = (reponse: Reponse | null) => {
-        let severity, label = 'Non répondue';
+        let severity: AlertProps.Severity | 'new' = 'new', label = 'Non répondue';
+
         if (reponse) {
             switch (reponse.reponse) {
                 case REPONSE_OPTIONS.OUI:
@@ -40,7 +42,7 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
                     break;
                 case REPONSE_OPTIONS.NON:
                     severity = 'error';
-                    label = `Non${reponse.pourcentage && ` (${reponse.pourcentage}%)`}`;
+                    label = `Non ${reponse.pourcentage && reponse?.pourcentage > 0 ? ` (${reponse.pourcentage}%)` : ''}`;
                     break;
                 case REPONSE_OPTIONS.NE_SAIS_PAS:
                     severity = 'warning';
@@ -151,7 +153,12 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
         { !audit.cloture && reponse && (
             <div>
                 <Badge severity="success" style={{marginRight: 10 }}>Répondue</Badge>
-                <Button priority="tertiary no outline" iconId="ri-arrow-go-back-line" onClick={() => {setReponse(null); setPercentage(0); setComment('')}}/>
+                <Button 
+                    title="Reset"
+                    priority="tertiary no outline" 
+                    iconId="ri-arrow-go-back-line" 
+                    onClick={() => {setReponse(null); setPercentage(0); setComment('')}}
+                />
             </div>
         )}
 
