@@ -6,7 +6,6 @@ import { headerFooterDisplayItem } from "@codegouvfr/react-dsfr/Display";
 import { fr } from "@codegouvfr/react-dsfr";
 import {
 	FooterConsentManagementItem,
-	FooterPersonalDataPolicyItem
 } from "../../../ui/consentManagement";
 import React from "react";
 import { getAudit } from "@/infrastructure/repositories/auditRepository";
@@ -45,7 +44,6 @@ export default async function RootLayout({ children, params: { auditHash } }: { 
 				bottomItems={[
 					headerFooterDisplayItem,
 					<FooterConsentManagementItem key={0} />,
-					<FooterPersonalDataPolicyItem key={1} />
 				]}
 			/>
 		</MuiDsfrThemeProvider>				
