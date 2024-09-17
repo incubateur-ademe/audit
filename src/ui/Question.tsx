@@ -2,7 +2,7 @@
 
 import { REPONSE_NON } from "@/app/constants";
 import { Audit, Question as QuestionType, REPONSE_OPTIONS, Reponse } from "@/domain/types";
-import { saveReponse } from "@/infrastructure/repositories/reponsesRepository";
+import { resetReponse, saveReponse } from "@/infrastructure/repositories/reponsesRepository";
 import Input from "@codegouvfr/react-dsfr/Input";
 import RadioButtons from "@codegouvfr/react-dsfr/RadioButtons";
 import { Range } from "@codegouvfr/react-dsfr/Range";
@@ -15,22 +15,42 @@ import { AlertProps } from "@codegouvfr/react-dsfr/Alert";
 export default function Question({ audit, question }: {audit: Audit, question: QuestionType }) {
 
     const [reponse, setReponse] = React.useState<REPONSE_OPTIONS | null>(question.reponse?.reponse || null);
-    const [comment, setComment] = React.useState(question.reponse?.commentaire || "");
-    const [percentage, setPercentage] = React.useState(question.reponse?.pourcentage || 0);
+    const [comment, setComment] = React.useState<string>(question.reponse?.commentaire || "");
+    const [percentage, setPercentage] = React.useState<number>(question.reponse?.pourcentage || 0);
 
+    const save = async () => {
+        await saveReponse({
+            auditId: audit.id, 
+            questionId: question.id, 
+            reponse, 
+            commentaire: comment ?? null, 
+            pourcentage: reponse === REPONSE_NON ? percentage : null
+        })
+    }
+
+    const reset = async () => {
+        await resetReponse(audit.id, question.id);
+        setReponse(null);
+        setComment("");
+        setPercentage(0);
+    }
+
+    // Initialize empty reponses
     React.useEffect(() => {
         const effect = async () => {
-            !audit.cloture && await saveReponse({
-                auditId: audit.id, 
-                questionId: question.id, 
-                reponse, 
-                commentaire: comment ?? null, 
-                pourcentage: reponse === REPONSE_NON ? percentage : null
-            });
+            !audit.cloture && !question.reponse && save() 
+        }
+        effect();
+    }, [question]);
+
+    // Update reponses
+    React.useEffect(() => {
+        const effect = async () => {
+            !audit.cloture && save();
         }
         effect();
     }, [reponse, comment, percentage]);
-
+    
     const badgeForReponse = (reponse: Reponse | null) => {
         let severity: AlertProps.Severity | 'new' = 'new', label = 'Non répondue';
 
@@ -91,7 +111,7 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
                                     label: "Oui",
                                     nativeInputProps: {
                                         checked: reponse === REPONSE_OPTIONS.OUI,
-                                        onChange: async () => { await setReponse(REPONSE_OPTIONS.OUI);  }
+                                        onChange: async () => { setReponse(REPONSE_OPTIONS.OUI); }
                                     }
                                 },
                                 {
@@ -157,7 +177,7 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
                     title="Reset"
                     priority="tertiary no outline" 
                     iconId="ri-arrow-go-back-line" 
-                    onClick={() => {setReponse(null); setPercentage(0); setComment('')}}
+                    onClick={reset}
                 />
             </div>
         )}

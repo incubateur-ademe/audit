@@ -39,9 +39,11 @@ export interface Audit {
 }
 
 export interface Reponse {
+    id?: number
     auditId: number
     questionId: number
     reponse: REPONSE_OPTIONS|null
     commentaire: string|null
     pourcentage: number|null
+    reset?: boolean
 }

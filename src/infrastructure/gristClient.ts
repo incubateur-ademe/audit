@@ -6,8 +6,8 @@ const { GRIST_URL, GRIST_API_KEY } = process.env;
 
 const apiClient = axios.create({
     baseURL: GRIST_URL,
-    headers: { Authorization: `Bearer ${GRIST_API_KEY}`}
-})
+    headers: { Authorization: `Bearer ${GRIST_API_KEY}`},
+});
 
 export async function getGristQuestions() {
     return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.QUESTIONS.ID}/records`, {
@@ -24,6 +24,14 @@ export async function getGristReponses(auditId: number) {
             filter: `{"Audit": [${auditId}]}`
         }
     })).data?.records ?? [];
+}
+
+export async function getGristReponse(auditId: number, questionId: number) {
+    return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.REPONSES.ID}/records`, {
+        params: {
+            filter: `{"Audit": [${auditId}], "Question": [${questionId}]}`
+        }
+    })).data?.records[0] ?? null;
 }
 
 export async function saveGristReponses(records: any) {

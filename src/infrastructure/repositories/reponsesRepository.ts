@@ -1,7 +1,7 @@
 'use server'
 
 import { Reponse } from "@/domain/types";
-import { getGristReponses, saveGristReponses } from "../gristClient";
+import { getGristReponse, getGristReponses, saveGristReponses } from "../gristClient";
 
 export async function getReponses(auditId: number): Promise<Reponse[]> {
 
@@ -17,8 +17,33 @@ export async function getReponses(auditId: number): Promise<Reponse[]> {
     }));
 }
 
+export async function getReponse(auditId: number, questionId: number): Promise<Reponse> {
+
+    const gristReponse = await getGristReponse(auditId, questionId);
+
+    return {
+        id: gristReponse.id,
+        auditId: gristReponse.fields.Audit,
+        questionId: gristReponse.fields.Question,
+        reponse: gristReponse.fields.Reponse,
+        commentaire: gristReponse.fields.Commentaires_Details,
+        pourcentage: gristReponse.fields.Pourcentage,
+    };
+}
+
 export async function saveReponse(reponse: Reponse) {
     await naiveSaveWithPacking(reponse);
+}
+
+export async function resetReponse(auditId: number, questionId: number) {
+    saveReponse({
+        auditId,
+        questionId,
+        reponse: null,
+        commentaire: "",
+        pourcentage: 0,
+        reset: true
+    })
 }
 
 export const reponseId = async (reponse: Reponse): Promise<string> => `${reponse.auditId}-${reponse.questionId}`;
@@ -34,7 +59,7 @@ async function naiveSaveWithPacking(reponse?: Reponse) {
         currentTimerId = setTimeout(naiveSaveWithPacking, 1000);
     } else {
         const countReponses = Object.keys(packedReponses).length;
-        if (!reponse|| countReponses > 20) {
+        if (!reponse || countReponses > 40) {
             if (countReponses > 0) {
                 await saveReponses(Object.values(packedReponses));
             }
@@ -44,9 +69,12 @@ async function naiveSaveWithPacking(reponse?: Reponse) {
     }
 
     if (reponse) {
-        packedReponses = {
-            ...packedReponses,
-            [await reponseId(reponse)]: reponse
+        const rId = await reponseId(reponse);
+        if (!packedReponses[rId]?.reset) {
+            packedReponses = {
+                ...packedReponses,
+                [rId]: reponse
+            }
         }
     } 
 }
@@ -58,13 +86,13 @@ export async function saveReponses(reponses: Reponse[]) {
             "Question": reponse.questionId,
         },
         fields: {
-            ... (reponse.reponse && {
+            ... ((reponse.reponse != null || reponse.reset) && {
                 "Reponse": reponse.reponse,
             }),
-            ... (reponse.commentaire && {
+            ... (reponse.commentaire != null && {
                 "Commentaires_Details": reponse.commentaire,
             }),
-            ... (reponse.pourcentage && {
+            ... (reponse.pourcentage != null && {
                 "Pourcentage": reponse.pourcentage,
             }),
         }
