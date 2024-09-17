@@ -9,13 +9,16 @@ import {
 	ConsentBannerAndConsentManagement,
 } from "../ui/consentManagement";
 import React from "react";
+import { getAudit } from "@/infrastructure/repositories/auditRepository";
 
-export default function RootLayout({ children }: { children: JSX.Element; }) {
+export default async function RootLayout({ children, params: { auditHash }  }: { children: JSX.Element; params: { auditHash: string} }) {
+
+	const audit = await getAudit(auditHash);
 
 	return (
 		<html {...getHtmlAttributes({ defaultColorScheme })}>
 			<head>
-				<title>ANCT - Incubateur - Audits techniques</title>
+				<title>${audit?.produit?.nom} - Audit technique - Incubateur - ANCT</title>
 				<StartDsfr />
 				<DsfrHead
 					Link={Link}
