@@ -47,3 +47,16 @@ export interface Reponse {
     pourcentage: number|null
     reset?: boolean
 }
+
+export interface Startup {
+    id?: number
+    idBeta: string
+    nom: string
+}
+
+export interface Collaborateur {
+    id?: number
+    idBeta: string
+    nomComplet: string
+    domaine: string
+}

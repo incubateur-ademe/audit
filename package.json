@@ -14,7 +14,8 @@
     "start": "next start",
     "lint": "next lint",
     "test": "vitest",
-    "test-ci": "vitest run --coverage"
+    "test-ci": "vitest run --coverage",
+    "sync-collaborateurs-startups": "node --env-file=.env.local -r ts-node/register src/bin/syncCollaborateursStartups.ts"
   },
   "dependencies": {
     "@codegouvfr/react-dsfr": "^1.11.5",
@@ -26,6 +27,7 @@
     "next": "14.2.7",
     "react": "^18",
     "react-dom": "^18",
+    "ts-node": "^10.9.2",
     "tss-react": "^4.9.12"
   },
   "devDependencies": {

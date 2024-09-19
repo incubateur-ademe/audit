@@ -9,6 +9,16 @@ yarn build
 yarn dev
 ```
 
+## Tools
+
+### Syncing collaborateurs & startups from beta.gouv.fr
+
+This script is pulling data from beta.gouv.fr API and pushing it to the configured grist document, [tuto video](https://www.loom.com/share/cc349d78023547d1b3ea4173472e0325)
+
+```
+yarn sync-collaborateurs-startups
+```
+
 ## License
 
 See [license file](License.md)
