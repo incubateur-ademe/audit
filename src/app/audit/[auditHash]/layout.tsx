@@ -9,6 +9,15 @@ import {
 } from "../../../ui/consentManagement";
 import React from "react";
 import { getAudit } from "@/infrastructure/repositories/auditRepository";
+import { Metadata } from "next";
+
+export async function generateMetadata({ params : { auditHash} }: { params: { auditHash: string }; }): Promise<Metadata> {
+  const audit = await getAudit(auditHash);
+
+  return {
+    title: `${audit?.produit.nom} - Audit technique - Incubateur - ANCT`,
+  };
+}
 
 export default async function RootLayout({ children, params: { auditHash } }: { children: JSX.Element; params: any }) {
 

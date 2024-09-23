@@ -9,16 +9,23 @@ import {
 	ConsentBannerAndConsentManagement,
 } from "../ui/consentManagement";
 import React from "react";
-import { getAudit } from "@/infrastructure/repositories/auditRepository";
+import { Metadata } from "next";
 
-export default async function RootLayout({ children, params: { auditHash }  }: { children: JSX.Element; params: { auditHash: string} }) {
 
-	const audit = await getAudit(auditHash);
+export const metadata: Metadata = {
+	title: {
+	  default: 'Audit technique - Incubateur des Territoires (ANCT)',
+	  template: '%s | Audit technique - Incubateur des Territoires (ANCT)'
+	},
+}
+
+
+export default async function RootLayout({ children }: { children: JSX.Element; }) {
+
 
 	return (
 		<html {...getHtmlAttributes({ defaultColorScheme })}>
 			<head>
-				<title>${audit?.produit?.nom} - Audit technique - Incubateur - ANCT</title>
 				<StartDsfr />
 				<DsfrHead
 					Link={Link}
