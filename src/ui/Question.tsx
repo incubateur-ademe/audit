@@ -41,7 +41,7 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
             !audit.cloture && !question.reponse && save() 
         }
         effect();
-    }, [question]);
+    }, [question, audit]);
 
     // Update reponses
     React.useEffect(() => {
@@ -49,7 +49,7 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
             !audit.cloture && save();
         }
         effect();
-    }, [reponse, comment, percentage]);
+    }, [reponse, comment, percentage, audit]);
     
     const badgeForReponse = (reponse: Reponse | null) => {
         let severity: AlertProps.Severity | 'new' = 'new', label = 'Non répondue';
