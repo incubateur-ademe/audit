@@ -24,7 +24,14 @@ test:
         coverage_format: cobertura
         path: coverage/cobertura-coverage.xml
 
-deploy:
+deploy-staging:
+  stage: cd
+  rules:
+      - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH  # Run this job when commits are pushed or merged to the default branch
+  script:
+    - git push git@ssh.osc-fr1.scalingo.com:survey-builder-anct-staging.git main
+
+deploy-prod:
   stage: cd
   image: registry.gitlab.com/gitlab-org/release-cli:latest
   allow_failure: false
@@ -35,7 +42,7 @@ deploy:
   when: manual
   manual_confirmation: 'Are you sure you want to deploy to production ?'
   script: 
-    - echo "Deploy to prod, boom !"
+    - git push git@ssh.osc-secnum-fr1.scalingo.com:survey-builder-anct-prod.git main
   release:                                         # See https://docs.gitlab.com/ee/ci/yaml/#release for available properties
     tag_name: 'v0.$CI_PIPELINE_IID'                # The version is incremented per pipeline.
     description: 'v0.$CI_PIPELINE_IID'
