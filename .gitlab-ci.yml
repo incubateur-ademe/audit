@@ -4,8 +4,8 @@ variables:
 image: node:20
 
 stages:
-#- ci
 - staging
+- ci
 - production
 
 sast:
