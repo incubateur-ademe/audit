@@ -1,14 +1,29 @@
 variables:
   SSH_PRIVATE_KEY_BASE64: ${SCALINGO_SSH_PRIVATE_KEY_BASE64}
-  SSH_PRIVATE_KEY: ${SCALINGO_SSH_PRIVATE_KEY}
+  #  SSH_PRIVATE_KEY: ${SCALINGO_SSH_PRIVATE_KEY}
+  # Scalingo does not support Shallow copies
   GIT_DEPTH: 0
 
-image: node:20
+default:
+  image: node:20
 
 stages:
+- build
 - staging
 - ci
 - production
+
+# Prepare stuff for the next jobs
+build-job:
+  image: alpine
+  stage: ci
+  script:
+    # Decode private key
+    - SSH_PRIVATE_KEY=`echo "$SSH_PRIVATE_KEY_BASE64" | base64 -d`
+    - echo "SSH_PRIVATE_KEY=$SSH_PRIVATE_KEY" >> build.env
+  artifacts:
+    reports:
+      dotenv: build.env
 
 sast:
   stage: ci
@@ -36,7 +51,9 @@ deploy-staging:
   rules:
       - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH  # Run this job when commits are pushed or merged to the default branch
   script:
-    #- git fetch origin main --unshallow
+    - SSH_PRIVATE_KEY=`echo "$SSH_PRIVATE_KEY_BASE64" | base64 -d`
+    - echo $SSH_PRIVATE_KEY
+    - echo $SCALINGO_SSH_PRIVATE_KEY
     - git-push git@ssh.osc-fr1.scalingo.com:survey-builder-anct-staging.git main
 
 release-prod:
