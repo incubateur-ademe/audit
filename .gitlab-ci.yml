@@ -36,6 +36,10 @@ deploy-staging:
       - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH  # Run this job when commits are pushed or merged to the default branch
   script:
 #    - SSH_PRIVATE_KEY=`echo "$SSH_PRIVATE_KEY_BASE64" | base64 -d`
+    - mkdir -p ~/.ssh
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
+    - chmod 600 ~/.ssh/id_rsa
+    - ssh-keyscan -H $ssh_port "$ssh_host" >> ~/.ssh/known_hosts
     - ssh -vT git@ssh.osc-fr1.scalingo.com
     - git-push git@ssh.osc-fr1.scalingo.com:survey-builder-anct-staging.git main
 
