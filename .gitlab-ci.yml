@@ -38,6 +38,7 @@ deploy-staging:
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
     - chmod 600 ~/.ssh/id_rsa
+    - ssh_port=
     - ssh-keyscan -H $ssh_port "$ssh_host" >> ~/.ssh/known_hosts
     - ssh -vT git@ssh.osc-fr1.scalingo.com
     - git-push git@ssh.osc-fr1.scalingo.com:survey-builder-anct-staging.git main
