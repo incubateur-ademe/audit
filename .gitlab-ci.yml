@@ -1,6 +1,7 @@
 variables:
   SSH_PRIVATE_KEY_BASE64: ${SCALINGO_SSH_PRIVATE_KEY_BASE64}
   SSH_PRIVATE_KEY: ${SCALINGO_SSH_PRIVATE_KEY}
+  GIT_DEPTH: 0
 
 image: node:20
 
@@ -35,6 +36,7 @@ deploy-staging:
   rules:
       - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH  # Run this job when commits are pushed or merged to the default branch
   script:
+    #- git fetch origin main --unshallow
     - git-push git@ssh.osc-fr1.scalingo.com:survey-builder-anct-staging.git main
 
 release-prod:
