@@ -25,6 +25,16 @@ export const GRIST = {
             FIELDS: {
                 ID: "ID2"
             }
+        },
+        STARTUPS: {
+            ID: "Startups",
+            FIELDS: {
+
+            }
+        },
+        COLLABORATEURS: {
+            ID: "Collaborateurs",
+            FIELDS: {}
         }
     }
 };
