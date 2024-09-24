@@ -34,7 +34,6 @@ deploy-staging:
   rules:
       - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH  # Run this job when commits are pushed or merged to the default branch
   script:
-    - echo "$SSH_PRIVATE_KEY_BASE64" | base64 -d
     - echo "$SSH_PRIVATE_KEY"
     - mkdir -p ~/.ssh
     - echo "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_rsa
