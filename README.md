@@ -9,6 +9,21 @@ yarn build
 yarn dev
 ```
 
+## Release process
+
+### Contribute
+
+Clone project locally, create a feature branch, code, test and push your branch
+Create a merge request
+
+### Deploying to staging
+
+When a merge request is merged, deploy to staging is automatic with the gitlab-ci pipeline
+
+### Deploying to production
+
+When happy with testing in staging, [go to the pipelines](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/-/pipelines) and click the play button to create a release, a tag and trigger the production deployment
+
 ## Tools
 
 ### Syncing collaborateurs & startups from beta.gouv.fr

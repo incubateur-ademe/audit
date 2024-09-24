@@ -5,6 +5,7 @@ variables:
 
 default:
   image: node:20
+  interruptible: true
 
 stages:
 - ci
