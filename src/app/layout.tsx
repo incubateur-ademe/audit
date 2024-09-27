@@ -10,7 +10,7 @@ import {
 } from "../ui/consentManagement";
 import React from "react";
 import { Metadata } from "next";
-
+import { Matomo } from "@/ui/Matomo";
 
 export const metadata: Metadata = {
 	title: {
@@ -21,7 +21,6 @@ export const metadata: Metadata = {
 
 
 export default async function RootLayout({ children }: { children: JSX.Element; }) {
-
 
 	return (
 		<html {...getHtmlAttributes({ defaultColorScheme })}>
@@ -42,6 +41,7 @@ export default async function RootLayout({ children }: { children: JSX.Element; 
 						//"Spectral-ExtraBold"
 					]}
 				/>
+				<Matomo/>
 			</head>
 			<body
 				style={{
