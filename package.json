@@ -4,7 +4,7 @@
   "license": "MIT",
   "type": "module",
   "engines": {
-    "node": "~20"
+    "node": "~21"
   },
   "scripts": {
     "predev": "react-dsfr update-icons",
@@ -23,6 +23,7 @@
     "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.13.0",
     "@mui/material": "^6.0.0",
+    "@sentry/nextjs": "^8",
     "@socialgouv/matomo-next": "^1.9.1",
     "axios": "^1.7.5",
     "next": "14.2.7",
