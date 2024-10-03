@@ -56,10 +56,12 @@ release-prod:
     tag_name: 'v1.$CI_PIPELINE_IID'                # The version is incremented per pipeline.
     description: 'v1.$CI_PIPELINE_IID'
     ref: '$CI_COMMIT_SHA'                          # The tag is created from the pipeline SHA.
+  environment:
+    name: production
 
 deploy-prod:
   image: ilyasemenov/gitlab-ci-git-push
-  stage: production
+  stage: cd
   interruptible: false 
   rules:
     - if: $CI_COMMIT_TAG
