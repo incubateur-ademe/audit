@@ -15,14 +15,12 @@ stages:
 sast:
   stage: ci
   rules:
-    - if: $CI_COMMIT_TAG
-      when: never
+    - if: $CI_COMMIT_TAG == null
 
 lint:
   stage: ci
   rules:
-    - if: $CI_COMMIT_TAG
-      when: never
+    - if: $CI_COMMIT_TAG == null
   script:
     - yarn
     - yarn lint
@@ -30,8 +28,7 @@ lint:
 test:
   stage: ci
   rules:
-    - if: $CI_COMMIT_TAG
-      when: never
+    - if: $CI_COMMIT_TAG == null
   script:
     - yarn
     - yarn test-ci
