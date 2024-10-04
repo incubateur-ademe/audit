@@ -8,14 +8,16 @@ Sentry.init({
   enabled: process.env.NODE_ENV !== 'development',
   environment: process.env.NODE_ENV,
   dsn: "https://f9b685143c03dae80c96b40701671db2@sentry.anct.cloud-ed.fr/11",
-
   // Add optional integrations for additional features
   integrations: [
     Sentry.replayIntegration(),
+    // Add browser profiling integration to the list of integrations
+    Sentry.browserProfilingIntegration(),
   ],
 
   // Define how likely traces are sampled. Adjust this value in production, or use tracesSampler for greater control.
-  tracesSampleRate: 1,
+  tracesSampleRate: process.env.NODE_ENV === 'production' ? 0.2 : 1,
+  profilesSampleRate: 0.5,
 
   // Define how likely Replay events are sampled.
   // This sets the sample rate to be 10%. You may want this to be 100% while
