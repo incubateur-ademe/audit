@@ -4,7 +4,7 @@ variables:
   GIT_DEPTH: 0
 
 default:
-  image: node:21-alpine
+  image: node:22-alpine
   interruptible: true
 
 stages:

@@ -4,7 +4,7 @@
   "license": "MIT",
   "type": "module",
   "engines": {
-    "node": "~21"
+    "node": "~22"
   },
   "scripts": {
     "predev": "react-dsfr update-icons",

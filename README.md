@@ -1,39 +1,84 @@
-This a project aiming to build survey forms from a set of questions stored on a Grist document, so that users may answer those questions and the responses could also be stored on a Grist document.
+# Audit Technique - Incubateur des Territoires
 
-## Local installation
+Bienvenue dans l'outil d'audit technique de l'incubateur des territoires. Cet outil permet d'évaluer les startups pour les préparer aux comités d'investissement. L'objectif de l'audit est de rendre visible la dette technique et de garantir la pérennité des produits numériques développés.
 
-```
-cp .env.template .env.local # Configure here your Grist server URL & API Key
-yarn
-yarn build
-yarn dev
-```
+Cette application est construite avec **Next.js** et utilise **react-dsfr** pour l'intégration des composants de l'interface utilisateur. Elle est déployée sur la plateforme **Scalingo**, avec une gestion des questions, catégories et réponses via **Grist**.
 
-## Release process
+## Fonctionnalités
 
-### Contribute
+- **Audit structuré** : Répondre à un ensemble de questions pour évaluer les aspects techniques des startups.
+- **Commentaires personnalisés** : Les utilisateurs peuvent fournir des explications lorsqu'ils répondent "Non" à certaines questions.
+- **Gestion des données via Grist** : Utilisation d'un document **Grist** pour stocker les questions d'audit, leurs catégories et les réponses.
+- **Interface utilisateur moderne** : Utilisation de **react-dsfr** pour un design conforme aux standards administratifs.
 
-Clone project locally, create a feature branch, code, test and push your branch
-Create a merge request
+## Prérequis
 
-### Deploying to staging
+- **Node.js** (~20)
+- **Grist** pour la gestion des données
 
-When a merge request is merged, deploy to staging is automatic with the gitlab-ci pipeline
+## Installation
 
-### Deploying to production
+1. Copiez le fichier d'exemple de configuration `.env.template` en `.env.local` :
+   ```bash
+   cp .env.template .env.local # Configure here your Grist server URL & API Key
+   ```
 
-When happy with testing in staging, [go to the pipelines](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/-/pipelines) and click the play button to create a release, a tag and trigger the production deployment
+2. Installez les dépendances :
+   ```bash
+   yarn
+   ```
 
-## Tools
+3. Compilez l'application pour la production :
+   ```bash
+   yarn build
+   ```
 
-### Syncing collaborateurs & startups from beta.gouv.fr
+4. Lancez l'application en mode développement :
+   ```bash
+   yarn dev
+   ```
 
-This script is pulling data from beta.gouv.fr API and pushing it to the configured grist document, [tuto video](https://www.loom.com/share/cc349d78023547d1b3ea4173472e0325)
+## Intégration avec Grist
 
-```
+L'application utilise Grist pour gérer les données d'audit. Suivez ces étapes pour configurer l'accès à l'API Grist :
+
+1. Générez un token API sur votre compte Grist.
+2. Ajoutez les informations suivantes dans votre fichier `.env.local` :
+
+   ```bash
+   GRIST_URL=https://grist.incubateur.anct.gouv.fr/api
+   GRIST_API_KEY=your_grist_api_key
+   ```
+
+## Processus de publication
+
+### Contribuer
+
+Clonez le projet localement, créez une branche dédiée pour votre fonctionnalité, codez, testez et poussez votre branche.  
+Créez ensuite une merge request.
+
+### Déploiement en staging
+
+Lorsque la merge request est fusionnée, le déploiement sur l'environnement de staging est automatique via le pipeline GitLab CI.
+
+### Déploiement en production
+
+Une fois les tests en staging validés, [accédez aux pipelines](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/-/pipelines) et cliquez sur le bouton "play" pour créer une release, générer un tag et déclencher le déploiement en production.
+
+## Outils
+
+### Synchronisation des collaborateurs et startups depuis beta.gouv.fr
+
+Ce script extrait les données de l'API de beta.gouv.fr et les pousse vers le document Grist configuré. [Tutoriel vidéo](https://www.loom.com/share/cc349d78023547d1b3ea4173472e0325)
+
+```bash
 yarn sync-collaborateurs-startups
 ```
 
-## License
+## Contribution
 
-See [license file](License.md)
+Les contributions sont les bienvenues ! Soumettez une pull request avec une description de vos modifications.
+
+## Licence
+
+Ce projet est sous licence MIT. Consultez le fichier [LICENSE](./LICENSE) pour plus d'informations.
