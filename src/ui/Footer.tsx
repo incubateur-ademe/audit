@@ -34,14 +34,14 @@ export function Footer() {
       bottomItems={[
 
         <Link
-          className="text-xs"
+          className="fr-text--xs"
           href="/mentions-legales"
           key="mentions-legales"
         >
           Mentions légales
         </Link>,
         <Link
-          className="text-xs"
+          className="fr-text--xs"
           href="/donnees-personnelles"
           key="donnees-personnelles"
         >
