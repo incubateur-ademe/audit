@@ -62,7 +62,7 @@ export default async function RootLayout({
                 brandTop={<>ANCT</>}
                 serviceTitle={"Audits techniques de l'incubateur de l'ANCT"}
                 homeLinkProps={{
-                  href: "#",
+                  href: "/",
                   title: "Audits techniques - ANCT",
                 }}
                 quickAccessItems={[headerFooterDisplayItem]}

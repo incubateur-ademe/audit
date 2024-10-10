@@ -6,7 +6,12 @@ export default async function Page({ params: { auditHash } }: any) {
   const audit = await getAudit(auditHash);
 
   if (!audit) {
-    return <p>Audit not found</p>;
+    return (
+      <p>
+        Désolé, l&apos;audit que vous cherchez n&apos;a pas été trouvé. Il est possible que le lien soit incorrect ou que l&apos;audit n&apos;existe plus. 
+        Veuillez vérifier les informations fournies ou contacter l&apos;équipe technique pour obtenir de l&apos;aide.
+      </p>
+    );
   }
 
   const categories = await getQuestions(audit.id);
@@ -15,23 +20,16 @@ export default async function Page({ params: { auditHash } }: any) {
     <>
       <h2>Audit technique du produit {audit.produit.nom}</h2>
       <p>
-        pour le comité d&apos;investissement du{" "}
+        Comité d&apos;investissement prévu pour le{" "}
         {audit.dateComiteInvestissement.toLocaleDateString("fr")}
       </p>
-      <p className="fr-text--lead">
-          Bienvenue sur votre audit technique.
-          <br />
-          La majorité des questions sont formulées de manière à ce qu&apos;une réponse &quot;Oui&quot; soit généralement souhaitable.
-          Cependant, il peut être tout à fait approprié de répondre &quot;Non&quot; dans certains cas.
-          Si c&apos;est le cas, merci de nous fournir un commentaire expliquant votre situation spécifique.
-          <br />
-          
-
-            Important : ce formulaire ne prend pas encore en charge l&apos;édition simultanée.
-            Si plusieurs personnes travaillent dessus en même temps, vous risquez d&apos;écraser les réponses des autres.
-          <br />
-          Bon audit !
-       </p>
+      <p className="fr-text--md fr-mb-2w">
+        Ce questionnaire vise à recueillir des informations techniques sur le produit. Une réponse positive (Oui) est généralement attendue, mais une réponse négative (Non) peut être tout à fait appropriée en fonction du contexte. Dans ce cas, merci de préciser les raisons dans les commentaires.
+      </p>
+      <p className="fr-text--sm fr-mb-4w">
+        <strong>Important :</strong> Le formulaire ne prend pas encore en charge l&apos;édition simultanée. Si plusieurs personnes travaillent dessus en même temps, cela risque d&apos;écraser les réponses des autres.
+      </p>
+      <p className="fr-text--lead fr-mb-6w">Merci pour votre contribution.</p>
       <Audit audit={audit} categories={categories} />
     </>
   );
