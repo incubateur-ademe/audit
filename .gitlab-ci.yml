@@ -2,6 +2,9 @@ variables:
   SSH_PRIVATE_KEY_BASE64: ${SCALINGO_SSH_PRIVATE_KEY_BASE64}
   # Scalingo does not support Shallow copies
   GIT_DEPTH: 0
+  GRIST_DOC_ID: 1234
+  GRIST_URL: https://test.com
+  GRIST_API_KEY: 1234
 
 default:
   image: node:22-alpine

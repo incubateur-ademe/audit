@@ -1,5 +1,4 @@
 export const GRIST = {
-    DOC_AUDIT: "2NShUvHttDcujvTVkRugTU",
     TABLES: {
         QUESTIONS: {
             ID: "Table1",

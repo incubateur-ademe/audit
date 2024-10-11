@@ -20,7 +20,7 @@ Cette application est construite avec **Next.js** et utilise **react-dsfr** pour
 
 1. Copiez le fichier d'exemple de configuration `.env.template` en `.env.local` :
    ```bash
-   cp .env.template .env.local # Configure here your Grist server URL & API Key
+   cp .env.template .env.local # Configure here your Grist server URL, API Key and doc ID
    ```
 
 2. Installez les dépendances :
@@ -48,7 +48,12 @@ L'application utilise Grist pour gérer les données d'audit. Suivez ces étapes
    ```bash
    GRIST_URL=https://grist.incubateur.anct.gouv.fr/api
    GRIST_API_KEY=your_grist_api_key
+   GRIST_DOC_ID=your_grist_doc_id
    ```
+
+L'application utilise Grist comme backend pour gérer les données d'audit. Grist centralise les questions, catégories et réponses dans un document dédié, permettant une gestion fluide et structurée des audits techniques.
+
+Ce document Grist est préconfiguré pour fonctionner avec l'application. Un exemple exporté est disponible dans le dossier grist-document de ce dépôt et peut être importé dans votre compte Grist. Il contient un ensemble de questions et un produit de test pour faciliter la mise en place de l'outil en local.
 
 ## Processus de publication
 

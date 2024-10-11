@@ -3,7 +3,7 @@ import axios from "axios";
 import { GRIST } from "../app/constants";
 import { Collaborateur, Startup } from "@/domain/types";
 
-const { GRIST_URL, GRIST_API_KEY } = process.env;
+const { GRIST_URL, GRIST_API_KEY, GRIST_DOC_ID } = process.env;
 
 const apiClient = axios.create({
     baseURL: GRIST_URL,
@@ -11,7 +11,7 @@ const apiClient = axios.create({
 });
 
 export async function getGristQuestions() {
-    return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.QUESTIONS.ID}/records`, {
+    return (await apiClient.get(`/docs/${GRIST_DOC_ID}/tables/${GRIST.TABLES.QUESTIONS.ID}/records`, {
         params: {
             sort: 'manualSort',
             filter: '{"Statut": ["Validée"]}'
@@ -20,7 +20,7 @@ export async function getGristQuestions() {
 }
 
 export async function getGristReponses(auditId: number) {
-    return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.REPONSES.ID}/records`, {
+    return (await apiClient.get(`/docs/${GRIST_DOC_ID}/tables/${GRIST.TABLES.REPONSES.ID}/records`, {
         params: {
             filter: `{"Audit": [${auditId}]}`
         }
@@ -28,7 +28,7 @@ export async function getGristReponses(auditId: number) {
 }
 
 export async function getGristReponse(auditId: number, questionId: number) {
-    return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.REPONSES.ID}/records`, {
+    return (await apiClient.get(`/docs/${GRIST_DOC_ID}/tables/${GRIST.TABLES.REPONSES.ID}/records`, {
         params: {
             filter: `{"Audit": [${auditId}], "Question": [${questionId}]}`
         }
@@ -36,13 +36,13 @@ export async function getGristReponse(auditId: number, questionId: number) {
 }
 
 export async function saveGristReponses(records: any) {
-    await apiClient.put(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.REPONSES.ID}/records`, { 
+    await apiClient.put(`/docs/${GRIST_DOC_ID}/tables/${GRIST.TABLES.REPONSES.ID}/records`, { 
         records 
     });
 }
 
 export async function getGristAudit(auditHash: string) {
-    return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.AUDITS.ID}/records`, {
+    return (await apiClient.get(`/docs/${GRIST_DOC_ID}/tables/${GRIST.TABLES.AUDITS.ID}/records`, {
         params: {
             filter: `{"${GRIST.TABLES.AUDITS.FIELDS.HASH}":["${auditHash}"]}`
         }
@@ -50,7 +50,7 @@ export async function getGristAudit(auditHash: string) {
 }
 
 export async function getGristProduit(produitId: number) {
-    return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.PRODUITS.ID}/records`, {
+    return (await apiClient.get(`/docs/${GRIST_DOC_ID}/tables/${GRIST.TABLES.PRODUITS.ID}/records`, {
         params: {
             filter: `{"${GRIST.TABLES.AUDITS.FIELDS.ID}":["${produitId}"]}`
         }
@@ -69,10 +69,10 @@ export async function setStartupMembers(startup: Startup, members: Collaborateur
         }]
     };
 
-    await apiClient.put(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.STARTUPS.ID}/records`, data);
+    await apiClient.put(`/docs/${GRIST_DOC_ID}/tables/${GRIST.TABLES.STARTUPS.ID}/records`, data);
 }
 export async function getGristStartups(): Promise<Startup[]> {
-    return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.STARTUPS.ID}/records`))
+    return (await apiClient.get(`/docs/${GRIST_DOC_ID}/tables/${GRIST.TABLES.STARTUPS.ID}/records`))
         .data.records.map((gristStartup: any) => ({
             id: gristStartup.id,
             idBeta: gristStartup.fields.Id_Beta,
@@ -94,13 +94,13 @@ export async function saveCollaborateurs(collaborateurs: Collaborateur[]): Promi
         }))
     };
 
-    await apiClient.put(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.COLLABORATEURS.ID}/records`, data);
+    await apiClient.put(`/docs/${GRIST_DOC_ID}/tables/${GRIST.TABLES.COLLABORATEURS.ID}/records`, data);
     
     return getCollaborateurs({ "idBeta": collaborateurs.map((c) => c.idBeta) });
 }
 
 export async function getCollaborateurs(filters: Record<string, string[]>): Promise<Collaborateur[]> {
-    return (await apiClient.get(`/docs/${GRIST.DOC_AUDIT}/tables/${GRIST.TABLES.COLLABORATEURS.ID}/records`,
+    return (await apiClient.get(`/docs/${GRIST_DOC_ID}/tables/${GRIST.TABLES.COLLABORATEURS.ID}/records`,
         {
             params: {
                 filter: JSON.stringify(filters)

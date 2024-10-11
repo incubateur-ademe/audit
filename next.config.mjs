@@ -9,6 +9,13 @@ const nextConfig = {
     return config;
   }
 };
+const { GRIST_URL, GRIST_API_KEY, GRIST_DOC_ID } = process.env;
+
+if (!GRIST_DOC_ID || !GRIST_URL || !GRIST_API_KEY) {
+  throw new Error(
+    "Erreur de configuration : Assurez-vous que GRIST_DOC_ID, GRIST_URL, et GRIST_API_KEY sont bien définis dans votre fichier .env.local."
+  );
+}
 
 export default withSentryConfig(nextConfig, {
 // For all available options, see:
