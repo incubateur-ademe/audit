@@ -1,21 +1,21 @@
 import { expect, test } from 'vitest'
 import { render, screen } from '@testing-library/react'
-import Categorie from '../Categorie'
-import { Audit, Categorie as CategorieType, Question } from '@/domain/types'
+import { Audit as AuditType, Categorie as CategorieType, Question } from '@/domain/types'
 import { mock } from 'vitest-mock-extended';
+import Audit from '../Audit';
 
-const audit = mock<Audit>();
-const categorie = {
+const audit = mock<AuditType>();
+const categories = [{
     ...mock<CategorieType>(),
     titre: 'Titre de catégorie',
     questions: [{
          ...mock<Question>(), 
          question: 'Une question de toute première importance ?'
     }]
-}
+}]
 
-test('Categorie', () => {
-    render(<Categorie audit={audit} categorie={categorie}/>)
+test('Audit', () => {
+    render(<Audit audit={audit} categories={categories}/>)
 
     expect(screen.getByTitle('Titre de catégorie')).toBeDefined()
     expect(screen.getByText('Une question de toute première importance ?')).toBeDefined();

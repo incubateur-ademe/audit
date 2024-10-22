@@ -14,7 +14,6 @@ default:
 stages:
 - ci
 - deploy
-- production
 
 sast:
   stage: ci
@@ -35,6 +34,8 @@ test:
     - yarn
     - yarn test-ci
   artifacts:
+    paths:
+      - coverage/lcov.info
     reports:
       coverage_report:
         coverage_format: cobertura
@@ -54,6 +55,9 @@ sonarcloud-check:
   only:
     - merge_requests
     - main
+  needs:
+    - job: test
+      artifacts: true
 
 deploy-staging:
   image: ilyasemenov/gitlab-ci-git-push

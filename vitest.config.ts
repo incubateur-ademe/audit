@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     coverage: {
         provider: 'istanbul',
-        reporter: ['text', 'cobertura']
+        reporter: ['text', 'cobertura', 'lcovonly']
     },
     environment: 'jsdom',
   },
