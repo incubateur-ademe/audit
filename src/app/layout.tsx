@@ -27,7 +27,7 @@ export default async function RootLayout({
   children: JSX.Element;
 }) {
   return (
-    <html {...getHtmlAttributes({ defaultColorScheme })}>
+    <html lang="fr" {...getHtmlAttributes({ defaultColorScheme })}>
       <head>
         <StartDsfr />
         <DsfrHead

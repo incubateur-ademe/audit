@@ -60,10 +60,12 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
                     severity = 'success';
                     label = 'Oui';
                     break;
-                case REPONSE_OPTIONS.NON:
+                case REPONSE_OPTIONS.NON: {
                     severity = 'error';
-                    label = `Non ${reponse.pourcentage && reponse?.pourcentage > 0 ? ` (${reponse.pourcentage}%)` : ''}`;
+                    const displayedPourcentage = reponse.pourcentage && reponse?.pourcentage > 0 ? ` (${reponse.pourcentage}%)` : '';
+                    label = `Non ${displayedPourcentage}`;
                     break;
+                }
                 case REPONSE_OPTIONS.NE_SAIS_PAS:
                     severity = 'warning';
                     label = 'Ne sais pas';

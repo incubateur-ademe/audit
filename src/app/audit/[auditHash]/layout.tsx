@@ -14,14 +14,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function RootLayout({
-  children,
-  params: { auditHash },
-}: {
-  children: JSX.Element;
-  params: any;
-}) {
-  const audit = await getAudit(auditHash);
+export default async function RootLayout({children}: {children: JSX.Element}) {
 
   return (
     <div

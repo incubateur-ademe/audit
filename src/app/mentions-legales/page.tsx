@@ -89,11 +89,11 @@ export default function Page() {
           Pour en savoir plus sur la politique d’accessibilité numérique de
           l’État : 
           <a
-            href="http://references.modernisation.gouv.fr/accessibilite-numerique"
+            href="https://references.modernisation.gouv.fr/accessibilite-numerique"
             target="_blank"
             title="Référentiel général d’amélioration de l’accessibilité - nouvelle fenêtre"
           >
-            http://references.modernisation.gouv.fr/accessibilite-numerique
+            https://references.modernisation.gouv.fr/accessibilite-numerique
           </a>
         </p>
 

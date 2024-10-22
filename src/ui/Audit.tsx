@@ -9,7 +9,7 @@ export default function Audit({ audit, categories }: { audit: AuditType, categor
     return (
         <>
             <Tabs
-                tabs={ categories && categories.map((categorie, index) => ({
+                tabs={ categories?.map((categorie, index) => ({
                     tabId: index,
                     label: categorie.titre,
                     content: (
