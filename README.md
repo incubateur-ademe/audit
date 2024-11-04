@@ -84,6 +84,8 @@ yarn sync-collaborateurs-startups
 
 Les contributions sont les bienvenues ! Soumettez une pull request avec une description de vos modifications.
 
+Idéalement le nouveau code devrait être couvert par des tests (Playwright & Vitest sont configurés) et ne pas dégrader le score sonarcloud (Sonar vous fait un retour sur votre Pull Request en la commentant)
+
 ## Licence
 
 Ce projet est sous licence MIT. Consultez le fichier [LICENSE](./LICENSE) pour plus d'informations.
