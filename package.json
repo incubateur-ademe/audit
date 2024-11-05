@@ -1,12 +1,13 @@
 {
   "name": "survey-builder",
-  "version": "0.1.0",
+  "version": "1.1.0",
   "license": "MIT",
   "type": "module",
   "engines": {
     "node": "~22"
   },
   "scripts": {
+    "release": "commit-and-tag-version",
     "predev": "react-dsfr update-icons",
     "prebuild": "react-dsfr update-icons",
     "dev": "next dev",
@@ -43,6 +44,7 @@
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",
     "@vitest/coverage-istanbul": "^2.1.1",
+    "commit-and-tag-version": "^12.5.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.7",
     "jsdom": "^25.0.1",
@@ -53,5 +55,6 @@
     "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.1.1",
     "vitest-mock-extended": "^2.0.2"
-  }
+  },
+  "packageManager": "yarn@4.5.1"
 }

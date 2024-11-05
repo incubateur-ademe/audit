@@ -82,6 +82,8 @@ yarn sync-collaborateurs-startups
 
 ## Contribution
 
+Avant de contribuer, installez et configurez [Talisman](https://github.com/thoughtworks/talisman) en pre-commit pour vous protéger contre les divulgation malencontreuses de secrets.
+
 Les contributions sont les bienvenues ! Soumettez une pull request avec une description de vos modifications.
 
 Idéalement le nouveau code devrait être couvert par des tests (Playwright & Vitest sont configurés) et ne pas dégrader le score sonarcloud (Sonar vous fait un retour sur votre Pull Request en la commentant)
