@@ -83,7 +83,7 @@ tag-prod:
     - apk add --no-cache bash git openssh-client
     - git config user.name "CI Bot"
     - git config user.email "support@incubateur.anct.gouv.fr"
-    - git remote add gitlab_origin https://oauth2:$GITLAB_ACCESS_TOKEN@gitlab.com:incubateur-territoires/incubateur/survey-builder.git
+    - git remote add gitlab_origin https://oauth2:$GITLAB_ACCESS_TOKEN@gitlab.com/incubateur-territoires/incubateur/survey-builder.git
     - yarn
     - yarn release
     - git push --follow-tags gitlab_origin HEAD:main -o ci.skip # prevent triggering pipeline again
