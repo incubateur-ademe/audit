@@ -32,6 +32,7 @@ export async function getReponse(auditId: number, questionId: number): Promise<R
 }
 
 export async function saveReponse(reponse: Reponse) {
+    console.log('saveReponse', reponse);
     await naiveSaveWithPacking(reponse);
 }
 

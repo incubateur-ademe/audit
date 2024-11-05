@@ -1,31 +1,39 @@
 'use client'
 
-import { REPONSE_NON } from "@/app/constants";
+import { REPONSE_NON, REPONSE_OUI } from "@/app/constants";
 import { Audit, Question as QuestionType, REPONSE_OPTIONS, Reponse } from "@/domain/types";
 import { resetReponse, saveReponse } from "@/infrastructure/repositories/reponsesRepository";
 import Input from "@codegouvfr/react-dsfr/Input";
 import RadioButtons from "@codegouvfr/react-dsfr/RadioButtons";
 import { Range } from "@codegouvfr/react-dsfr/Range";
-import React from "react";
+import React, { ChangeEvent, ChangeEventHandler, FormEvent } from "react";
 import { Badge } from "@codegouvfr/react-dsfr/Badge";
 import { Card } from "@codegouvfr/react-dsfr/Card";
 import { Button } from "@codegouvfr/react-dsfr/Button";
 import { AlertProps } from "@codegouvfr/react-dsfr/Alert";
 
-export default function Question({ audit, question }: {audit: Audit, question: QuestionType }) {
+export default function Question({ audit, question, onChange }: {audit: Audit, question: QuestionType, onChange: ChangeEventHandler<HTMLFormElement> }) {
 
     const [reponse, setReponse] = React.useState<REPONSE_OPTIONS | null>(question.reponse?.reponse || null);
     const [comment, setComment] = React.useState<string>(question.reponse?.commentaire || "");
     const [percentage, setPercentage] = React.useState<number>(question.reponse?.pourcentage || 0);
 
-    const save = async () => {
-        await saveReponse({
+    function handleChange(event: ChangeEvent<HTMLInputElement>, questionId: string) {
+
+        if (!event.target.name || !event.target.id || !event.target.value) {
+            return;
+        }
+
+        const {name, value, id} = event.target;
+        setReponse(value as REPONSE_OPTIONS);
+        console.log(name, id, value, questionId);
+        onChange({
             auditId: audit.id, 
             questionId: question.id, 
-            reponse, 
+            value, 
             commentaire: comment ?? null, 
-            pourcentage: reponse === REPONSE_NON ? percentage : null
-        })
+            pourcentage: value === REPONSE_NON ? percentage : null
+        });
     }
 
     const reset = async () => {
@@ -36,20 +44,6 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
     }
 
     // Initialize empty reponses
-    React.useEffect(() => {
-        const effect = async () => {
-            !audit.cloture && !question.reponse && save() 
-        }
-        effect();
-    }, [question, audit]);
-
-    // Update reponses
-    React.useEffect(() => {
-        const effect = async () => {
-            !audit.cloture && save();
-        }
-        effect();
-    }, [reponse, comment, percentage, audit]);
     
     const badgeForReponse = (reponse: Reponse | null) => {
         let severity: AlertProps.Severity | 'new' = 'new', label = 'Non répondue';
@@ -112,33 +106,34 @@ export default function Question({ audit, question }: {audit: Audit, question: Q
                                 {
                                     label: "Oui",
                                     nativeInputProps: {
-                                        checked: reponse === REPONSE_OPTIONS.OUI,
-                                        onChange: async () => { setReponse(REPONSE_OPTIONS.OUI); }
+                                        value: REPONSE_OPTIONS.OUI,
+                                        onChange: (event) => { handleChange(event, question.id); }
                                     }
                                 },
                                 {
                                     label: "Non",
                                     nativeInputProps: {
-                                        checked: reponse === REPONSE_OPTIONS.NON,
-                                        onChange: async () => { await setReponse(REPONSE_OPTIONS.NON);   }
+                                        value: REPONSE_OPTIONS.NON,
+                                        onChange: (event) => { handleChange(event, question.id); }
                                     }
                                 },
                                 {
                                     label: "Je ne sais pas",
                                     nativeInputProps: {
-                                        checked: reponse === REPONSE_OPTIONS.NE_SAIS_PAS,
-                                        onChange: async () => { await setReponse(REPONSE_OPTIONS.NE_SAIS_PAS); }
+                                        value: REPONSE_OPTIONS.NE_SAIS_PAS,
+                                        onChange: (event) => { handleChange(event, question.id); }
                                     }
                                 },
                                 {
                                     label: "Non applicable",
                                     nativeInputProps: {
-                                        checked: reponse === REPONSE_OPTIONS.NON_APPLICABLE,
-                                        onChange: async () => { await setReponse(REPONSE_OPTIONS.NON_APPLICABLE); }
+                                        value: REPONSE_OPTIONS.NON_APPLICABLE,
+                                        onChange: (event) => { handleChange(event, question.id); }
                                     }
                                 }
                             ]}
                         />
+                        {reponse}
                         { reponse === REPONSE_NON && (
                             <Range
                                 disabled={audit.cloture}
