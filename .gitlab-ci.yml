@@ -51,18 +51,15 @@ sonarcloud-check:
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
+  rules:
+  - if: $CI_COMMIT_TAG || $CI_COMMIT_TITLE =~ /^chore(release):.*/
+    when: never # Do not run this job when a tag is created
   cache:
     key: "${CI_JOB_NAME}"
     paths:
       - .sonar/cache
-  rules:
-  - if: $CI_COMMIT_TAG || $CI_COMMIT_TITLE =~ /^chore(release):.*/
-    when: never # Do not run this job when a tag is created
   script:
     - sonar-scanner
-  only:
-    - merge_requests
-    - main
   needs:
     - job: test
       artifacts: true
