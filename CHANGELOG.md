@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.2.7](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.6...v1.2.7) (2024-11-05)
+
 ## [1.2.6](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.5...v1.2.6) (2024-11-05)
 
 ## [1.2.5](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.4...v1.2.5) (2024-11-05)
