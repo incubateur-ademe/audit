@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.2.2](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.1...v1.2.2) (2024-11-05)
+
+
+### Bug Fixes
+
+* **ci:** do not run pipeline upon release commit ([95ab93d](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/commit/95ab93d1b4c1f4739aa78d6f6f90a8cd742c61a2))
+* **ci:** exploring gitlab ci rules ^^ ([6d612d9](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/commit/6d612d9ae5c300b99c5b20b4ac200f27169dfe7e))
+* **ci:** rules & only can't be together ([3adaef1](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/commit/3adaef11cdee85b8df29288b8cd106be9b9c1125))
+* **ci:** syntax error, maybe because of missing rules in sonarcloud-check ([ba42f2d](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/commit/ba42f2d206c7912eb425ec6f041c38a2a9c5b251))
+
 ## [1.2.1](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.0...v1.2.1) (2024-11-05)
 
 
