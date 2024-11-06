@@ -7,6 +7,7 @@ variables:
   GRIST_DOC_ID: 1234
   GRIST_URL: https://test.com
   GRIST_API_KEY: 1234
+  SAST_EXCLUDED_ANALYZERS: $CI_COMMIT_TITLE =~ /^chore.release.:.*/ ? 'semgrep' : ''
 
 default:
   image: node:22-alpine
@@ -15,6 +16,15 @@ default:
 stages:
 - ci
 - deploy
+
+sast:
+  stage: ci
+
+semgrep-sast-local:
+  extends: semgrep-sast
+  rules:
+    - if: $CI_COMMIT_TITLE =~ /^chore.release.:.*/
+      when: never
 
 lint:
   stage: ci
@@ -116,4 +126,10 @@ deploy-prod:
   script:
     - export SSH_PRIVATE_KEY=`echo "$SSH_PRIVATE_KEY_BASE64" | base64 -d`
     - git-push git@ssh.osc-secnum-fr1.scalingo.com:survey-builder-anct-prod.git main
+
+include:
+  - template: Security/SAST.gitlab-ci.yml
+    rules:
+    - if: $CI_COMMIT_TITLE =~ /^chore.release.:.*/
+      when: never
 
