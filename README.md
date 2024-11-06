@@ -25,17 +25,17 @@ Cette application est construite avec **Next.js** et utilise **react-dsfr** pour
 
 2. Installez les dépendances :
    ```bash
-   yarn
+   npm install
    ```
 
 3. Compilez l'application pour la production :
    ```bash
-   yarn build
+   npm run build
    ```
 
 4. Lancez l'application en mode développement :
    ```bash
-   yarn dev
+   npm run dev
    ```
 
 ## Intégration avec Grist
@@ -77,7 +77,7 @@ Une fois les tests en staging validés, [accédez aux pipelines](https://gitlab.
 Ce script extrait les données de l'API de beta.gouv.fr et les pousse vers le document Grist configuré. [Tutoriel vidéo](https://www.loom.com/share/cc349d78023547d1b3ea4173472e0325)
 
 ```bash
-yarn sync-collaborateurs-startups
+npm run sync-collaborateurs-startups
 ```
 
 ## Contribution

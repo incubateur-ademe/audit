@@ -48,7 +48,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'NODE_ENV=test yarn prebuild && yarn dev -p3025',
+    command: 'NODE_ENV=test npm run prebuild && npm run dev -- -p3025',
     url: 'http://localhost:3025',
     reuseExistingServer: !process.env.CI,
   },
