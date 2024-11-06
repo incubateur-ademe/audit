@@ -7,27 +7,17 @@ variables:
   GRIST_DOC_ID: 1234
   GRIST_URL: https://test.com
   GRIST_API_KEY: 1234
-  SAST_EXCLUDED_ANALYZERS: $CI_COMMIT_TITLE =~ /^chore.release.:.*/ ? 'semgrep' : ''
 
 default:
   image: node:22-alpine
   interruptible: true
 
 stages:
-- ci
+- test
 - deploy
 
-sast:
-  stage: ci
-
-semgrep-sast-local:
-  extends: semgrep-sast
-  rules:
-    - if: $CI_COMMIT_TITLE =~ /^chore.release.:.*/
-      when: never
-
 lint:
-  stage: ci
+  stage: test
   rules:
     - if: $CI_COMMIT_TITLE =~ /^chore.release.:.*/
       when: never
@@ -37,7 +27,7 @@ lint:
     - npm run lint
 
 test:
-  stage: ci
+  stage: test
   image: node:22-bookworm
   rules:
     - if: $CI_COMMIT_TITLE =~ /^chore.release.:.*/
@@ -56,7 +46,7 @@ test:
         path: coverage/cobertura-coverage.xml
 
 sonarcloud-check:
-  stage: ci
+  stage: test
   image:
     name: sonarsource/sonar-scanner-cli:latest
     entrypoint: [""]
