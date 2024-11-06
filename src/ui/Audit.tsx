@@ -1,26 +1,44 @@
 'use client'
-import { Tabs } from "@codegouvfr/react-dsfr/Tabs";
-import React from "react";
-import { Audit as AuditType, Categorie as CategorieType } from "@/domain/types";
-import Categorie from "@/ui/Categorie";
 
-export default function Audit({ audit, categories }: { audit: AuditType, categories: CategorieType[]}) {
-    
+import { Tabs } from "@codegouvfr/react-dsfr/Tabs"
+import { Audit as AuditType, Categorie as CategorieType, Reponse } from "@/domain/types"
+import Question from "./Question"
+import QuestionReadonly from "./QuestionReadonly"
+import { saveReponse } from "@/infrastructure/repositories/reponsesRepository"
+
+export default function Audit({ audit, categories }: { audit: AuditType, categories: CategorieType[] }) {
+    const handleQuestionChange = (reponse: Reponse) => {
+        saveReponse(reponse)
+    }
+
     return (
         <>
             <Tabs
-                tabs={ categories?.map((categorie, index) => ({
+                tabs={categories?.map((categorie, index) => ({
                     tabId: index,
                     label: categorie.titre,
-                    content: (
-                        categorie.titre && (
-                            <Categorie 
-                                audit={audit} 
-                                categorie={categorie}
-                            />)
-                        )})
-                    )}
+                    content: categorie.titre ? (
+                        <div key={`category.${categorie.titre}`} title={categorie.titre}>
+                            {categorie.questions.map((question) => (
+                                audit.cloture ? (
+                                    <QuestionReadonly
+                                        audit={audit}
+                                        question={question}
+                                        key={`question.${question.id}`}
+                                    />
+                                ) : (
+                                    <Question
+                                        audit={audit}
+                                        question={question}
+                                        key={`question.${question.id}`}
+                                        onChange={handleQuestionChange}
+                                    />
+                                )
+                            ))}
+                        </div>
+                    ) : undefined
+                }))}
             />
         </>
-    );
+    )
 }

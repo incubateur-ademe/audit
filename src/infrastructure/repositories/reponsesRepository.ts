@@ -35,17 +35,6 @@ export async function saveReponse(reponse: Reponse) {
     await naiveSaveWithPacking(reponse);
 }
 
-export async function resetReponse(auditId: number, questionId: number) {
-    saveReponse({
-        auditId,
-        questionId,
-        reponse: null,
-        commentaire: "",
-        pourcentage: 0,
-        reset: true
-    })
-}
-
 export const reponseId = async (reponse: Reponse): Promise<string> => `${reponse.auditId}-${reponse.questionId}`;
 
 let isPacking: boolean;
