@@ -32,19 +32,7 @@ export async function getReponse(auditId: number, questionId: number): Promise<R
 }
 
 export async function saveReponse(reponse: Reponse) {
-    console.log('saveReponse', reponse);
     await naiveSaveWithPacking(reponse);
-}
-
-export async function resetReponse(auditId: number, questionId: number) {
-    saveReponse({
-        auditId,
-        questionId,
-        reponse: null,
-        commentaire: "",
-        pourcentage: 0,
-        reset: true
-    })
 }
 
 export const reponseId = async (reponse: Reponse): Promise<string> => `${reponse.auditId}-${reponse.questionId}`;

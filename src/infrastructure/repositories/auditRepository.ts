@@ -3,7 +3,12 @@
 import { Audit } from "@/domain/types";
 import { getGristAudit, getGristProduit } from "../gristClient";
 
-export async function getAudit(auditHash: string): Promise<Audit|null> {
+export async function getAudit(auditHash: string|null): Promise<Audit|null> {
+
+    if (!auditHash) {
+        return null;
+    }
+
     const gristAudit = await getGristAudit(auditHash);
 
     if (!gristAudit) {
