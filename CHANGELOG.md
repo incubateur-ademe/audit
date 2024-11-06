@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.2.11](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.10...v1.2.11) (2024-11-06)
+
+
+### Bug Fixes
+
+* **build:** try fixing failing release by switching to npm ([adb002d](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/commit/adb002db6b4227f18918e106620759c229813de7))
+
 ## [1.2.10](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.9...v1.2.10) (2024-11-06)
 
 
