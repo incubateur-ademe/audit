@@ -122,4 +122,5 @@ include:
     rules:
     - if: $CI_COMMIT_TITLE =~ /^chore.release.:.*/
       when: never
+    - when: always
 
