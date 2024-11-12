@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.2.12](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.11...v1.2.12) (2024-11-12)
+
+
+### Bug Fixes
+
+* **ci:** include rules ([7abb01c](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/commit/7abb01c0cd509d8e8cc7b05a1d933c5c4ebca238))
+* **ci:** run SAST except on release commit ([8300b00](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/commit/8300b00f23ca2e9db6bcd66eadf654a5f7aaf605))
+* **ci:** run SAST except on release commit ([47306ea](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/commit/47306ea34ead2799adb9f0b5d43330fe169d147b))
+
 ## [1.2.11](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.10...v1.2.11) (2024-11-06)
 
 
