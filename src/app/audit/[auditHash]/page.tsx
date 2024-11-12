@@ -2,7 +2,7 @@ import { getAudit } from "@/infrastructure/repositories/auditRepository";
 import { getQuestions } from "@/infrastructure/repositories/questionRepository";
 import Audit from "@/ui/Audit";
 
-export default async function Page({ params: { auditHash } }: any) {
+export default async function Page({ params: { auditHash } }: { params: { auditHash: string|null } }) {
   const audit = await getAudit(auditHash);
 
   if (!audit) {
@@ -15,6 +15,10 @@ export default async function Page({ params: { auditHash } }: any) {
   }
 
   const categories = await getQuestions(audit.id);
+
+  if (!categories) {
+    return <p>Chargement des questions...</p>;
+  }
 
   return (
     <>
