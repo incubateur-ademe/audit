@@ -23,7 +23,7 @@ lint:
       when: never
     - if: $CI_COMMIT_TAG == null
   script:
-    - npm install
+    - npm ci
     - npm run lint
 
 test:
@@ -34,7 +34,7 @@ test:
       when: never
     - if: $CI_COMMIT_TAG == null
   script:
-    - npm install
+    - npm ci
     - npx playwright install --with-deps
     - npm run test-ci
   artifacts:
