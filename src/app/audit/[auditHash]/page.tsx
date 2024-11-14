@@ -2,8 +2,9 @@ import { getAudit } from "@/infrastructure/repositories/auditRepository";
 import { getQuestions } from "@/infrastructure/repositories/questionRepository";
 import Audit from "@/ui/Audit";
 
-export default async function Page({ params: { auditHash } }: { params: { auditHash: string|null } }) {
-  const audit = await getAudit(auditHash);
+export default async function Page({ params }: Readonly<{ params: Promise<{ auditHash: string|null }> }>) {
+  const auditHash = (await params).auditHash; 
+  const audit = await getAudit(auditHash ?? "");
 
   if (!audit) {
     return (

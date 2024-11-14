@@ -6,7 +6,7 @@ import Question from "./Question"
 import QuestionReadonly from "./QuestionReadonly"
 import { saveReponse } from "@/infrastructure/repositories/reponsesRepository"
 
-export default function Audit({ audit, categories }: { audit: AuditType, categories: CategorieType[] }) {
+export default function Audit({ audit, categories }: Readonly<{ audit: AuditType, categories: CategorieType[] }>) {
     const handleQuestionChange = (reponse: Reponse) => {
         saveReponse(reponse)
     }

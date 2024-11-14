@@ -6,7 +6,7 @@ import { Badge } from "@codegouvfr/react-dsfr/Badge"
 import { Card } from "@codegouvfr/react-dsfr/Card"
 import type { AlertProps } from "@codegouvfr/react-dsfr/Alert"
 
-export default function QuestionReadonly({ audit, question }: {audit: Audit, question: QuestionType }) {
+export default function QuestionReadonly({ audit, question }: Readonly<{audit: Audit, question: QuestionType }>) {
     const badgeForReponse = (reponse: Reponse | null): JSX.Element => {
         if (!reponse) {
             return <Badge 
@@ -33,7 +33,7 @@ export default function QuestionReadonly({ audit, question }: {audit: Audit, que
                 case REPONSE_OPTIONS.NON_APPLICABLE:
                     return { severity: 'info', label: 'Non applicable' }
             }
-            
+
             return { severity: 'new', label: 'Non répondue' }
         }
 
