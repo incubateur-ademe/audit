@@ -14,7 +14,7 @@ export async function generateMetadata({
   };
 }
 
-export default async function RootLayout({children}: {children: JSX.Element}) {
+export default async function RootLayout({children}: Readonly<{children: JSX.Element}>) {
 
   return (
     <div

@@ -21,7 +21,7 @@ interface QuestionState {
   pourcentage: number;
 }
 
-export default function Question({ audit, question, onChange }: QuestionProps) {
+export default function Question({ audit, question, onChange }: Readonly<QuestionProps>) {
 
     const [state, setState] = React.useState<QuestionState>({
         reponse: question.reponse?.reponse || null,
