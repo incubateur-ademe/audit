@@ -78,12 +78,10 @@ export async function saveReponses(reponses: Reponse[]) {
             ... ((reponse.reponse != null || reponse.reset) && {
                 "Reponse": reponse.reponse,
             }),
-            ... (reponse.commentaire != null && {
+            ... ((reponse.commentaire != null || reponse.reset) && {
                 "Commentaires_Details": reponse.commentaire,
             }),
-            ... (reponse.pourcentage != null && {
-                "Pourcentage": reponse.pourcentage,
-            }),
+            "Pourcentage": reponse.pourcentage,
         }
     })))
     
