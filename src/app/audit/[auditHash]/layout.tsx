@@ -5,17 +5,20 @@ import { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: {
-  params: { auditHash: string };
-}): Promise<Metadata> {
-  const audit = await getAudit(params.auditHash);
+  params: Promise<{ auditHash: string }>;
+} ): Promise<Metadata> {
+  const audit = await getAudit((await params).auditHash);
 
   return {
     title: `${audit?.produit.nom} - Audit technique - Incubateur - ANCT`,
   };
 }
 
-export default async function RootLayout({children}: Readonly<{children: JSX.Element}>) {
-
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
   return (
     <div
       style={{

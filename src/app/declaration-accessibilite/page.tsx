@@ -1,6 +1,6 @@
 export default function Page() {
     return (
-      <div role="main" id="content">
+      <main id="content">
         <div className="fr-mb-md-14v pt-20 max-w-screen-lg mx-auto px-4">
           <h1>Déclaration d&apos;accessibilité</h1>
   
@@ -90,7 +90,7 @@ export default function Page() {
             </li>
           </ul>
         </div>
-      </div>
+      </main>
     );
   }
   
