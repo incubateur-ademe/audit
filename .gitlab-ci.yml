@@ -35,6 +35,7 @@ test:
     - if: $CI_COMMIT_TAG == null
   script:
     - npm ci
+    - npm run build # Check that the build is successful
     - npx playwright install --with-deps
     - npm run test-ci
   artifacts:

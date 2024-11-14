@@ -7,7 +7,7 @@ type Props = {
     id?: string;
 };
 
-export function LoginHeaderItem(props: Props) {
+export function LoginHeaderItem(props: Readonly<Props>) {
 
     const { id } = props;
 
