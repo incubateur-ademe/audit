@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+## [1.2.14](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.13...v1.2.14) (2024-11-18)
+
+
+### Bug Fixes
+
+* add sentry env vars ([175a52f](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/commit/175a52f78c875dacf5d90b800ff937f838a70e67))
+* **deps:** update package.lock and use npm ci on gitlab-ci ([0d120f9](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/commit/0d120f9b79e211cfa66954f16b73a611457588e9))
+
 ## [1.2.13](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.12...v1.2.13) (2024-11-14)
 
 ## [1.2.12](https://gitlab.com/incubateur-territoires/incubateur/survey-builder/compare/v1.2.11...v1.2.12) (2024-11-12)
